@@ -10,8 +10,17 @@
 	</head>
 	<body>
 		<div id="app">
+			{% if user.is_authenticated %}
+			<div class="userbar">
+				<a href="{% url accounts.views.account %}">My Account</a> |
+				<a href="{% url accounts.views.logout %}">Logout</a>
+			</div>
+			{% endif %}
 			<div class="header">
 				<h1>{{ APPLICATION_TITLE }} - {% block title %}Home{% endblock %}</h1>
+			</div>
+			<div class="navigation">
+				<a href="{%url default.views.index %}">Home</a>
 			</div>
 			<div class="body">
 				{% block messages %}

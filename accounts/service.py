@@ -24,3 +24,11 @@ def register(username, first_name, last_name, email, password):
 	user.set_password(password)
 	user.save()
 	return user
+
+def update(user, first_name, last_name, password = None):
+	user.first_name = first_name
+	user.last_name = last_name
+	if password:
+		user.set_password(password)
+	user.save()
+	return user

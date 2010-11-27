@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib import messages
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, AccountForm
 import TheBlameGame.service
 import service as service
 from django.contrib.auth.decorators import login_required
@@ -58,7 +58,7 @@ def register(request):
 			)
 			messages.success(
 				request,
-				'You have successfully been signed up. Please check your email to verify your account'
+				'You have successfully been signed up.'
 			)
 			user = service.login(request, register_form.cleaned_data['username'], register_form.cleaned_data['password'])
 			if not user:
@@ -83,3 +83,29 @@ def logout(request):
 	messages.success(request, 'You have been logged out')
 	service.logout(request)
 	return HttpResponseRedirect('/')
+
+@login_required
+def account(request):
+	if request.method == 'POST':
+		account_form = AccountForm(request.POST)
+		if account_form.is_valid():
+			user = service.update(
+				request.user,
+				account_form.cleaned_data['first_name'],
+				account_form.cleaned_data['last_name'],
+				account_form.cleaned_data['password'],
+			)
+			messages.success(
+				request,
+				'Your account has successfully been updated.'
+			)
+	else:
+		account_form = AccountForm(instance=request.user)
+		
+	data = {
+		'forms': {
+			'account': account_form
+		},
+	}
+	return render_to_response('accounts/account.html', data, context_instance = RequestContext(request))
+

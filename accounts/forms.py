@@ -112,3 +112,32 @@ class RegisterForm(forms.Form):
 			return email
 		raise forms.ValidationError("A user with that email is already registered.")
 		
+
+class AccountForm(forms.ModelForm):
+	error_css_class = 'error'
+	
+	password = forms.CharField(
+		required=False,
+		label="Password",
+		widget=forms.PasswordInput
+	)
+	
+	confirm_password = forms.CharField(
+		required=False,
+		label="Confirm Password",
+		widget=forms.PasswordInput,
+	)
+	
+	class Meta:
+		model = User
+		fields = ('first_name', 'last_name', 'password')
+		widgets = {
+			'password': forms.PasswordInput(attrs={'value':''}),
+		}	
+	def clean_confirm_password(self):
+		password = self.cleaned_data.get("password", "")
+		password_confirm = self.cleaned_data["confirm_password"]
+		if password != "" and password != password_confirm:
+			raise forms.ValidationError("The two password fields didn't match.")
+		return password_confirm
+		

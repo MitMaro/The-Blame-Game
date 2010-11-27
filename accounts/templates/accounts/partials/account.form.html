@@ -1,0 +1,14 @@
+<form method="post" action="{% url accounts.views.account %}">
+	<div>
+		{% csrf_token %}
+		<div class="section-title"><h2>My Account</h2></div>
+		<div class="section-content">
+			<ul class="form">
+				{{ forms.account.as_ul }}
+				<li class="controls">
+					<input type="submit" value="Save" />
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>

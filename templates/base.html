@@ -1,0 +1,36 @@
+{% load static %} 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>{{ APPLICATION_TITLE }}</title>
+		<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}/css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}/css/common.css" />
+		{% block head %}{% endblock %}
+	</head>
+	<body>
+		<div id="app">
+			<div class="header">
+				<h1>{{ APPLICATION_TITLE }} - {% block title %}Home{% endblock %}</h1>
+			</div>
+			<div class="body">
+				{% block messages %}
+				{% if messages %}
+				<div class="messages">
+					<ul>
+						{% for message in messages %}
+						<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				{% endif %}
+				{% endblock %}
+				<div class="content">
+				{% block content %}
+				{% endblock %}
+				</div>
+			</div>
+		</div>
+		{% block bottom-javascript %}{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Add Point{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url game.views.add team_id %}">
+	<div class="section_centered section_medium">
+		{% csrf_token %}
+		<div class="section-title"><h2>Add Point</h2></div>
+		<div class="section-content">
+			<ul class="form">
+				{{ forms.add.as_ul }}
+				<li class="controls">
+					<a href="{% url game.views.score team_id %}">Cancel</a>
+					<input type="submit" value="Add Point" />
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>
+{% endblock %}

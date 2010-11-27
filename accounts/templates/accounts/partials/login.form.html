@@ -1,0 +1,19 @@
+<form method="post" action="{% url accounts.views.login %}">
+	<div>
+		{% csrf_token %}
+		<input type="hidden" name="next" value="{{ NEXT }}" />
+		<div class="section-title"><h2>Member Login</h2></div>
+		<div class="section-content">
+			<ul class="form">
+				<li class="info">
+					Don't have an account? <a href="{% url accounts.views.register %}">Create One!</a>
+				</li>
+				{{ forms.login.as_ul }}
+				<li class="controls">
+					<a href="">Forgot Password?</a>
+					<input type="submit" value="Login" />
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>

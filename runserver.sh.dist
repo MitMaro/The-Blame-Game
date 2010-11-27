@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./build.sh
+
+ python manage.py runserver blamegame.local:8888

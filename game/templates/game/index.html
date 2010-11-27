@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Teams{% endblock %}
+
+{% block content %}
+<div class="section_medium">
+	<div class="section-title"><h2>Your Teams</h2></div>
+	<div class="section-content">
+		<ul>
+		{% for team in teams  %}
+			<li><a href="{% url game.views.score team.id %}">{{ team.name }}</a></li>
+		{% empty %}
+			<li>No Teams</li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endblock %}

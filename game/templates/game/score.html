@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Score{% endblock %}
+
+{% block content %}
+<div class="section">
+	<div class="section-title"><h2>{{ team.name }} - Scores</h2></div>
+	<div class="section-content">
+		<div class="breaks-title">Breaks</div>
+		<div class="fixes-title">Fixes</div>
+		<ul class="form"><li class="controls"><a href="{% url game.views.add team.id %}">Add Point</a></li></ul>
+		<table class="board">
+			<tr class="header">
+				<td class="empty"/>
+				{% for key, player in points.players.items %}
+					<th>{{ player.player.get_full_name }}</th>
+				{% endfor %}
+				<th>Total Fixes</th>
+			</tr>
+			{% for key, player in points.players.items %}
+			 <tr class="score">
+				<th>{{ player.player.get_full_name }}</th>
+				{% for key, point in player.fixes.items %}
+				<td>{{ point }}</td>
+				{% endfor %}
+				<td class="total">{{ player.total_fixes }}</td>
+			 </tr>
+			{% endfor %}
+			<tr class="totals">
+				<th>Total Breaks</th>
+				{% for key, player in points.players.items %}
+				<td>{{ player.total_breaks }}</td>
+				{% endfor %}
+				<td>{{ points.total }}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+{% endblock %}

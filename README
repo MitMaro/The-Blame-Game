@@ -1,0 +1,17 @@
+The Blame Game
+By: Tim Oram
+See LICENSE for licensing information
+
+Dependencies
+----------------------------------------------------------------------------------------------------
+1) Django (Tested: Django 1.3 alpha 1)
+
+
+Setup and Running Instructions
+----------------------------------------------------------------------------------------------------
+1) Make a copy of settings_local.dist.py and name it settings_local.py
+2) Edit settings_local.py adding the appropriate values for the settings
+3) Make a copy of runserver.sh.dist and name it runserver.sh
+4) Edit runserver.sh to your own liking
+5) Make sure the executable permissions are set on build.sh and runserver.sh
+6) Run runserver.sh
